@@ -1,0 +1,10 @@
+[user]
+	name = 09fl
+	email = 6722817+09fl@users.noreply.github.com
+	signingkey = ~/.ssh/id_ed25519
+[commit]
+	gpgsign = true
+[gpg]
+	format = ssh
+[init]
+	defaultBranch = master

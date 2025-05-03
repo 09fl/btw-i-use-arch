@@ -1,0 +1,11 @@
+include "/usr/share/nano/*.nanorc"
+
+set autoindent
+set indicator
+set linenumbers
+set mouse
+set stateflags
+set tabsize 4
+set tabstospaces
+
+bind Sh-M-C "{execute}| xsel -ib {enter}{undo}" main
