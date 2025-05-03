@@ -40,7 +40,7 @@ BLUE="\[$(tput setaf 12)\]"
 PURPLE="\[$(tput setaf 13)\]"
 CYAN="\[$(tput setaf 14)\]"
 
-. ~/git-prompt.sh
+. ~/.git-prompt.sh
 
 PROMPT_COMMAND=update_ps1
 update_ps1() {
@@ -97,3 +97,5 @@ fi
 if [ -f /usr/share/nvm/init-nvm.sh ]; then
     source /usr/share/nvm/init-nvm.sh
 fi
+
+command -v fastfetch >/dev/null && fastfetch
