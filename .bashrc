@@ -9,21 +9,19 @@ shopt -s autocd cdspell dirspell globstar histappend
 HISTCONTROL=ignoreboth:erasedups
 
 export EDITOR='nano -/'
-export VISUAL="$EDITOR"
-export LESS='-FMNR -x4 --mouse'
+export VISUAL=$EDITOR
+export LESS='-FMNR -x4 --mouse --wheel-lines=3 --use-color -DNy'
 
-eval "`dircolors`"
+eval "$(dircolors)"
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 alias sudo='sudo '
 alias nano='nano -/'
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
+alias ls='ls -F --color=auto'
 alias ll='ls -l'
-alias la='ls -la'
-alias l='ls -laF'
+alias l='ls -la'
+alias grep='grep -n --color=auto'
+alias man='MANWIDTH=$(($COLUMNS-7)) man'
 
 # Style constants
 RESET="\[$(tput sgr0)\]"
@@ -57,9 +55,9 @@ update_ps1() {
     fi
     PS1+="[$(printf %3d $retval)]$RESET "
     # Add username and hostname
-    PS1+="$ITALIC$BLUE($(whoami)@$(hostname))$RESET "
+    PS1+="$ITALIC$BLUE(\u@\h)$RESET "
     # Add current time
-    local ps1_date=$(date "+%F %T.%3N")
+    local ps1_date=$(date '+%F %T.%3N')
     rand=$RANDOM
     for (( i=0; i<${#ps1_date}; i++ )); do
         color=$((202 + 6*($rand%4) + 6*$i/${#ps1_date}))
@@ -67,7 +65,7 @@ update_ps1() {
     done
     PS1+="$RESET "
     # Add current directory
-    local ps1_pwd=$(dirs "+0")
+    local ps1_pwd=$(dirs '+0')
     rand=$RANDOM
     PS1+="$BOLD"
     for (( i=0; i<${#ps1_pwd}; i++ )); do
@@ -84,7 +82,7 @@ update_ps1() {
         PS1+="$GREEN`__git_ps1`$RESET"
     fi
     # Add \$
-    PS1+=" \\$ "
+    PS1+=' \$ '
 
     unset rand
     unset color
@@ -98,4 +96,10 @@ if [ -f /usr/share/nvm/init-nvm.sh ]; then
     source /usr/share/nvm/init-nvm.sh
 fi
 
-command -v fastfetch >/dev/null && fastfetch
+if command -v fastfetch >/dev/null; then
+    if command -v lolcat >/dev/null; then
+        fastfetch | lolcat
+    else
+        fastfetch
+    fi
+fi
