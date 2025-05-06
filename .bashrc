@@ -23,6 +23,16 @@ alias l='ls -la'
 alias grep='grep -n --color=auto'
 alias man='MANWIDTH=$(($COLUMNS-7)) man'
 
+if [ -f /usr/share/git/git-prompt.sh ]; then
+    . /usr/share/git/git-prompt.sh
+fi
+
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWSTASHSTATE=1
+GIT_PS1_SHOWUNTRACKEDFILES=1
+GIT_PS1_SHOWUPSTREAM="auto"
+GIT_PS1_SHOWCOLORHINTS=1
+
 # Style constants
 RESET="\[$(tput sgr0)\]"
 BOLD="\[$(tput bold)\]"
@@ -38,10 +48,8 @@ BLUE="\[$(tput setaf 12)\]"
 PURPLE="\[$(tput setaf 13)\]"
 CYAN="\[$(tput setaf 14)\]"
 
-. ~/.git-prompt.sh
-
-PROMPT_COMMAND=update_ps1
-update_ps1() {
+PROMPT_COMMAND=__update_ps1
+__update_ps1() {
     # Save last return value
     local retval="$?"
     PS1=""
@@ -78,9 +86,7 @@ update_ps1() {
     # Add history number
     PS1+="$UNDLINE$CYAN#\!$RESET"
     # Add git info
-    if [ "$(command -v __git_ps1)" ]; then
-        PS1+="$GREEN`__git_ps1`$RESET"
-    fi
+    if [ "$(command -v __git_ps1)" ]; then PS1+="$(__git_ps1)"; fi
     # Add \$
     PS1+=' \$ '
 
@@ -96,8 +102,8 @@ if [ -f /usr/share/nvm/init-nvm.sh ]; then
     source /usr/share/nvm/init-nvm.sh
 fi
 
-if command -v fastfetch >/dev/null; then
-    if command -v lolcat >/dev/null; then
+if [ "$(command -v fastfetch)" ]; then
+    if [ "$(command -v lolcat)" ]; then
         fastfetch | lolcat
     else
         fastfetch
