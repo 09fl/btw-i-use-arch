@@ -1,3 +1,4 @@
+
 #
 # ~/.bashrc
 #
@@ -20,7 +21,7 @@ alias nano='nano -/'
 alias ls='ls -F --color=auto'
 alias ll='ls -l'
 alias l='ls -la'
-alias grep='grep -n --color=auto'
+alias grep='grep -Tn --color=auto'
 alias man='MANWIDTH=$(($COLUMNS-7)) man'
 
 if [ -f /usr/share/git/git-prompt.sh ]; then
@@ -94,12 +95,19 @@ __update_ps1() {
     unset color
 }
 
+# pkgfile
 if [ -f /usr/share/doc/pkgfile/command-not-found.bash ]; then
     source /usr/share/doc/pkgfile/command-not-found.bash
 fi
 
+# nvm
 if [ -f /usr/share/nvm/init-nvm.sh ]; then
     source /usr/share/nvm/init-nvm.sh
+fi
+
+# rustup
+if [ -d ~/.cargo/bin ]; then
+    PATH="$PATH:~/.cargo/bin"
 fi
 
 if [ "$(command -v fastfetch)" ]; then
