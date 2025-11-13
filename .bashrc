@@ -94,7 +94,9 @@ __update_ps1() {
     # Add history number
     PS1+="$UNDLINE$CYAN#\!$RESET"
     # Add git info
-    if [ "$(command -v __git_ps1)" ]; then PS1+="$(__git_ps1)"; fi
+    if exists __git_ps1; then PS1+="$(__git_ps1)"; fi
+    # Add virtualenv info
+    if [[ -v VIRTUAL_ENV_PROMPT ]]; then PS1+=" ($VIRTUAL_ENV_PROMPT)"; fi
     # Add \$
     PS1+=' \$ '
 
@@ -104,6 +106,10 @@ __update_ps1() {
 
 # pkgfile
 src_if_exists /usr/share/doc/pkgfile/command-not-found.bash
+
+# virtualenvwrapper
+export WORKON_HOME=~/.virtualenvs
+src_if_exists /usr/bin/virtualenvwrapper.sh
 
 # nvm
 src_if_exists /usr/share/nvm/init-nvm.sh
