@@ -1,15 +1,27 @@
 [user]
-	name = 09fl
-	email = 6722817+09fl@users.noreply.github.com
-	signingkey = ~/.ssh/id_ed25519
+    name = 09fl
+    email = 6722817+09fl@users.noreply.github.com
+    signingkey = ~/.ssh/id_ed25519
 [commit]
-	gpgsign = true
+    gpgsign = true
 [gpg]
-	format = ssh
+    format = ssh
 [init]
-	defaultBranch = master
+    defaultBranch = master
+[alias]
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
+    unstage = reset HEAD --
+[help]
+    autocorrect = true
+[diff]
+    algorithm = histogram
+[push]
+    autoSetupRemote = true
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
