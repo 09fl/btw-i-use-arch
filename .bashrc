@@ -56,7 +56,7 @@ BLUE="\[$(tput setaf 12)\]"
 PURPLE="\[$(tput setaf 13)\]"
 CYAN="\[$(tput setaf 14)\]"
 
-PROMPT_COMMAND=__update_ps1
+PROMPT_COMMAND="history -n; history -w; history -c; history -r; __update_ps1"
 __update_ps1() {
     # Save last return value
     local retval="$?"
@@ -93,10 +93,10 @@ __update_ps1() {
     # 2nd line
     # Add history number
     PS1+="$UNDLINE$CYAN#\!$RESET"
+    # Add virtualenv info
+    if [[ -v VIRTUAL_ENV_PROMPT ]]; then PS1+=" ($YELLOW$VIRTUAL_ENV_PROMPT$RESET)"; fi
     # Add git info
     if exists __git_ps1; then PS1+="$(__git_ps1)"; fi
-    # Add virtualenv info
-    if [[ -v VIRTUAL_ENV_PROMPT ]]; then PS1+=" ($VIRTUAL_ENV_PROMPT)"; fi
     # Add \$
     PS1+=' \$ '
 
