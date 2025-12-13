@@ -7,6 +7,8 @@
 
 shopt -s autocd cdspell dirspell globstar histappend no_empty_cmd_completion
 HISTCONTROL=ignoreboth:erasedups
+HISTSIZE=100000
+HISTFILESIZE=100000
 
 export EDITOR='nano -/'
 export VISUAL=$EDITOR
