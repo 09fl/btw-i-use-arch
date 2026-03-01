@@ -1,11 +1,37 @@
 include "/usr/share/nano/*.nanorc"
 
 set autoindent
+set constantshow
 set indicator
 set linenumbers
+set magic
+set minibar
 set mouse
+set multibuffer
+set smarthome
 set stateflags
 set tabsize 4
 set tabstospaces
+set trimblanks
 
-bind Sh-M-C "{execute}| xsel -ib {enter}{undo}" main
+unbind ^N all
+
+bind ^H help all
+bind ^Q exit all
+bind ^W writeout all
+bind ^S savefile all
+bind ^O insert all
+bind ^F whereis all
+bind ^B wherewas all
+bind ^D findprevious all
+bind ^G findnext all
+bind ^R replace all
+bind ^X cut all
+bind ^C copy main
+bind ^V paste all
+bind ^A mark all
+bind ^P location all
+bind ^E execute all
+bind ^T gotoline all
+bind ^Z undo all
+bind ^Y redo all

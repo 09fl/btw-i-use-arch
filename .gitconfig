@@ -15,11 +15,16 @@
     st = status
     unstage = reset HEAD --
 [help]
-    autocorrect = true
+    autocorrect = immediate
 [diff]
     algorithm = histogram
+[pull]
+    rebase = true
 [push]
     autoSetupRemote = true
+[fetch]
+    prune = true
+
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f

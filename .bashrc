@@ -46,7 +46,7 @@ HISTSIZE=100000
 HISTFILESIZE=100000
 
 # Aliases and colors
-export EDITOR='nano -/'
+export EDITOR='nano'
 export VISUAL=$EDITOR
 export LESS='-FMNR -x4 --mouse --wheel-lines=3 --use-color -DNy'
 if exists source-highlight; then
@@ -56,7 +56,6 @@ export GREP_COLORS="mt=01;$R256:fn=$P256:ln=$Y256:bn=$Y256:se=$C256"
 eval "$(dircolors ~/btw-i-use-arch/LS_COLORS)"
 
 alias sudo='sudo '
-alias nano='nano -/'
 alias man='MANWIDTH=$(($COLUMNS-7)) man'
 alias ls='ls -F --color=auto'
 alias ll='ls -l'
@@ -64,7 +63,7 @@ alias l='ls -la'
 alias grep='grep -Tn --color'
 alias diff="diff --color --palette=\"ad=$G256:de=$R256:ln=$C256\""
 
-# Git promot
+# Git prompt
 src_if_exists /usr/share/git/git-prompt.sh
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWSTASHSTATE=1
