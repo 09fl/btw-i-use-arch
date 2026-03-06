@@ -43,12 +43,16 @@ exe_if_exists() {
 shopt -s autocd cdspell dirspell globstar histappend no_empty_cmd_completion
 HISTCONTROL=ignoreboth:erasedups
 HISTSIZE=100000
-HISTFILESIZE=100000
+HISTFILESIZE=$HISTSIZE
+
+# Windows Terminal fix
+if [[ -n $WT_SESSION ]]; then export COLORTERM='truecolor'; fi
 
 # Aliases and colors
-export EDITOR='nano'
+export EDITOR=nano
 export VISUAL=$EDITOR
 export LESS='-FMNR -x4 --mouse --wheel-lines=3 --use-color -DNy'
+export LESSHISTFILE=-
 if exists source-highlight; then
     export LESSOPEN="| source-highlight --infer-lang --failsafe --outlang-def=$HOME/btw-i-use-arch/esc256.outlang --style-file=esc256.style -i %s"
 fi
@@ -72,7 +76,7 @@ GIT_PS1_SHOWUPSTREAM="auto"
 GIT_PS1_SHOWCOLORHINTS=1
 
 # Main prompt
-PROMPT_COMMAND="__update_ps1; history -n; history -w; history -c; history -r"
+PROMPT_COMMAND="__update_ps1; history -a"
 __update_ps1() {
     # Save last return value
     local retval="$?"
