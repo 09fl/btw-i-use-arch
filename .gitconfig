@@ -13,7 +13,7 @@
     br = branch
     ci = commit
     st = status
-    unstage = reset HEAD --
+    unstash = stash pop
 [help]
     autocorrect = immediate
 [diff]

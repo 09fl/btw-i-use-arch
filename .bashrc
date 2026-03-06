@@ -43,7 +43,10 @@ exe_if_exists() {
 shopt -s autocd cdspell dirspell globstar histappend no_empty_cmd_completion
 HISTCONTROL=ignoreboth:erasedups
 HISTSIZE=100000
-HISTFILESIZE=100000
+HISTFILESIZE=$HISTSIZE
+
+# Windows Terminal fix
+if [[ -n $WT_SESSION ]]; then export COLORTERM='truecolor'; fi
 
 # Aliases and colors
 export EDITOR='nano'
@@ -72,7 +75,7 @@ GIT_PS1_SHOWUPSTREAM="auto"
 GIT_PS1_SHOWCOLORHINTS=1
 
 # Main prompt
-PROMPT_COMMAND="__update_ps1; history -n; history -w; history -c; history -r"
+PROMPT_COMMAND="__update_ps1; history -a"
 __update_ps1() {
     # Save last return value
     local retval="$?"

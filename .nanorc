@@ -14,6 +14,13 @@ set tabsize 4
 set tabstospaces
 set trimblanks
 
+set functioncolor orange
+set keycolor black,peach
+set numbercolor yellow
+set promptcolor mint
+set statuscolor black,green
+set titlecolor green
+
 unbind ^N all
 
 bind ^H help all
