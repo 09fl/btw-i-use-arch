@@ -45,6 +45,9 @@ HISTCONTROL=ignoreboth:erasedups
 HISTSIZE=100000
 HISTFILESIZE=100000
 
+# Windows Terminal fix
+if [[ -n $WT_SESSION ]]; then export COLORTERM='truecolor'; fi
+
 # Aliases and colors
 export EDITOR='nano'
 export VISUAL=$EDITOR
