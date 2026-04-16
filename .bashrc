@@ -114,7 +114,15 @@ __update_ps1() {
     # Add history number
     PS1+="$UNDLINE$CYAN#\!$RESET"
     # Add virtualenv info
-    if [[ -v VIRTUAL_ENV_PROMPT ]]; then PS1+=" ($YELLOW$VIRTUAL_ENV_PROMPT$RESET)"; fi
+    if [[ -v VIRTUAL_ENV_PROMPT ]]; then
+        PS1+=" ("
+        if [[ $VIRTUAL_ENV_PROMPT = $(basename $PWD) ]]; then
+            PS1+=$YELLOW
+        else
+            PS1+=$RED
+        fi
+        PS1+="$VIRTUAL_ENV_PROMPT$RESET)"
+    fi
     # Add git info
     if exists __git_ps1; then PS1+="$(__git_ps1)"; fi
     # Add \$
@@ -127,17 +135,12 @@ __update_ps1() {
 # pkgfile
 src_if_exists /usr/share/doc/pkgfile/command-not-found.bash
 
-# virtualenvwrapper
-export WORKON_HOME=~/.virtualenvs
-src_if_exists /usr/bin/virtualenvwrapper.sh
-
 # nvm
 src_if_exists /usr/share/nvm/init-nvm.sh
 
-# rustup
-if [[ -d ~/.cargo/bin ]]; then
-    PATH="$PATH:~/.cargo/bin"
-fi
+# uv & rustup
+if [[ -d ~/.local/bin ]]; then export PATH="$HOME/.local/bin:$PATH"; fi
+if [[ -d ~/.cargo/bin ]]; then export PATH="$HOME/.cargo/bin:$PATH"; fi
 
 # fastfetch
 if shopt -q login_shell && exists fastfetch; then
