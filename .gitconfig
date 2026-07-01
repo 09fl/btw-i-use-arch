@@ -1,0 +1,37 @@
+[user]
+	name = 09fl
+	email = 6722817+09fl@users.noreply.github.com
+	signingkey = ~/.ssh/id_ed25519
+[commit]
+	gpgsign = true
+[gpg]
+	format = ssh
+[init]
+	defaultBranch = master
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	unstash = stash pop
+[help]
+	autocorrect = immediate
+[diff]
+	algorithm = histogram
+[pull]
+	rebase = true
+[push]
+	autoSetupRemote = true
+[fetch]
+	prune = true
+[grep]
+    fallbackToNoIndex = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[lfs "customtransfer.xet"]
+	path = git-xet
+	args = transfer
+	concurrent = true
